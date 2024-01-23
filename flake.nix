@@ -9,11 +9,11 @@
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
       pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
-    in
-    {
       legacyPackages = forAllSystems (system: import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
       });
+    in
+    {      
       overlay = {nixcasks = legacyPackages.${final.system};};
       devShells = forAllSystems (system: {
         default = pkgs."${system}".mkShell {};
