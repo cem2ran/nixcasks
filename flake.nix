@@ -14,6 +14,7 @@
       legacyPackages = forAllSystems (system: import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
       });
+      overlay = {nixcasks = legacyPackages.${final.system};};
       devShells = forAllSystems (system: {
         default = pkgs."${system}".mkShell {};
       });
