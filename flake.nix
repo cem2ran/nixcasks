@@ -14,7 +14,7 @@
       });
     in
     {      
-      overlay = {nixcasks = legacyPackages.${final.system};};
+      overlay = {nixcasks = legacyPackages.${system};};
       devShells = forAllSystems (system: {
         default = pkgs."${system}".mkShell {};
       });
